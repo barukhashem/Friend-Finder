@@ -8,10 +8,37 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 </head>
 
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="best-match" tabindex="-1" role="dialog" aria-labelledby="best-match-title"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="best-match-title">Here's Your Match</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Friend Finder</h1>
@@ -207,76 +234,54 @@
                                 </div>
                             </div> -->
                             <br>
-                            <button type="button" class="btn btn-primary btn-block" id="submit">Submit</button>
-                            <!-- <td><input type="submit" value="Submit Survey"> </td> -->
-                            <!-- <div class="text-left">
-                                <button type="submit" class="btn btn-primary btn-md" id="submit-btn">
-                                    <span class="fa fa-fire"></span> Submit</button> -->
-                            <script>
-                                console.log("submit");
-                            </script>
+                            <button type="button" class="btn btn-primary btn-block" id="submit" data-toggle="modal"
+                                data-target="#best-match">Submit</button>
                         </form>
-                        <!-- Modal -->
-                        <div class="modal fade" id="friend-modal" role="dialog">
-                            <div class="modal-dialog">
 
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title"></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <script type="text/javascript">
                         // This Submit button's on-click event receives the user input:
-                        $("#submit-button").on("click", function (event) {
+                        $("#submit").on("click", function (event) {
                             event.preventDefault();
 
-                            //This checks to make sure the form is filled out:
-                            var validEntry;
-                            if ($("#name").val().trim() === "") {
-                                alert("Please provide a name.");
+                            //creating an object to hold the newly entered information
+                            var newFriend =
+                            {
+                                name: $("#name").val().trim(),
+                                photo: $("#link").val().trim(),
+                                scores: [
+
+                                    $("#name").val().trim(),
+                                    $("#link").val().trim(),
+                                    $("#q1").val().trim(),
+                                    $("#q2").val().trim()
+                                    // $("#q3").val().trim(),
+                                    // $("#q4").val().trim(),
+                                    // $("#q5").val().trim(),
+                                    // $("#q6").val().trim(),
+                                    // $("#q7").val().trim(),
+                                    // $("#q8").val().trim(),
+                                    // $("#q9").val().trim(),
+                                    // $("#q10").val().trim(),
+                                ]
                             }
-                            else if ($("#link").val().trim() === "") {
-                                alert("Please provide a link to a photo.");
-                            }
-                            else {
-                                //This is an empty array to hold the value from the survey questions:
-                                var answerArray = [];
-                                //Creating a for loop to push the answers from survey to the array (NEED TO UPDATE i< AS QUESTIONS ARE ADDED):
-                                for (i = 1; i < 11; i++) {
-                                    answerArray.push(parseInt($("#question" + i).val().substring(0, 1)));
-                                }
+                            $.post("/api/friends", newFriend).then(function (data) {
+                                $("friend-modal").modal("toggle");
 
-                                //This creates an object to hold the newly entered information:
-                                var newFriend = {
-                                    name: $("#name").val().trim(),
-                                    image: $("#link").val().trim(),
-                                    scores: answerArray
-                                };
-
-                                //This records the current location (should work after deployment):
-                                var currentURL = window.location.origin;
-
-                                $.post("/api/friends", newFriend)
-                                    .then(function (data) {
-                                        console.log("survey.html", data);
-
-                                        // This clears the form after submitting the user input:
-                                        $("#name").val("");
-                                        $("#link").val("");
-                                    });
-                            }
+                                // var bestMatch;
+                                // var currentBestMatch = 22;
+                                // var differenceArray = [];
+                            });
                         });
+
+                        //This empty array holds the value from the survey questions:
+                        // var answerArray = [];
+
+                        //loop to push the answers from survey to the array (NEED TO UPDATE i< AS QUESTIONS ARE ADDED)
+                        // for (i = 1; i < 11; i++) {
+                        //     answerArray.push(parseInt($("#question" + i).val().substring(0, 1)));
+                        // }
+                        // });
 
                     </script>
                 </div>
