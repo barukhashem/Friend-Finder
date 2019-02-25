@@ -1,21 +1,6 @@
-// Questions (DATA)
-
-var questions = [
-    {
-        question1: "I have an outgoing personality.",
-        question2: "I tend to keep my word.",
-        question3: "I like kids.",
-        question4: "I tend to get upset easily.",
-        question5: "Maintaining harmony in my family is important to me.",
-        question6: "I tend to handle stress well.",
-        question7: "I am a sports fan.",
-        question8: "I tend to be considerate of other people's feelings.",
-        question9: "I like animals.",
-        question10: "I tend to handle conflict well.",
-    }
-]
-
 // Friends (DATA)
+
+// This is an array of objects that will be looped through:
 // =============================================================
 var friends = [
     {

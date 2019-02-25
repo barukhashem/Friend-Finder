@@ -1,54 +1,63 @@
-// Dependencies
-// =============================================================
+// DEPENDENCIES
+// These are a series of npm packages used to give the server useful functionality:
 var express = require("express");
 var path = require("path");
 
 var friends = require("./app/data/friends");
 // console.log(friends);
-// Sets up the Express App
+
 // =============================================================
+// EXPRESS CONFIGURATION
+// This sets up the basic properties for the express server and tells node that I'm creating an "express" server:
 var app = express();
 
-// Sets up for whichever port Heroku assigns, otherwise defaults to port 3000
+// This sets up for whichever port Heroku assigns, otherwise it defaults to port 3000:
 var PORT = process.env.PORT || 3000;
 
-// Sets up the Express app to allow middleware to handle data parsing of the body of the request
+// This sets up the Express app to allow middleware to handle data parsing of the body of the request:
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// =============================================================
+// LISTENER
+// This "starts" the server to begin listening:
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
+});
+
+// ROUTER
+// The routes below point the server to a series of route map files to direct it when users visit or request data from the URLs:
+require("./app/routes/apiRoutes")(app);
+require("./app/routes/htmlRoutes")(app);
+
+// =============================================================
+// GLOBAL VARIABLES:
 var user1 = friends[0].scores;
 var user2 = friends[1].scores;
 console.log(user1, user2);
 var totalDifference = 0;
 
-for (var i = 0; i < user1.length; i++) {
-  // console.log(user1[i], user2[i]);
-  var num1 = user1[i];
-  var num2 = user2[i];
-  var singleDifference = Math.abs(num1 - num2);
-  console.log(singleDifference);
-  totalDifference = singleDifference + totalDifference;
-}
+// for (var i = 0; i < user1.length; i++) {
+//   // console.log(user1[i], user2[i]);
+//   var num1 = user1[i];
+//   var num2 = user2[i];
+//   var singleDifference = Math.abs(num1 - num2);
+//   console.log(singleDifference);
+//   totalDifference = singleDifference + totalDifference;
+// }
 console.log(totalDifference);
 
-// Routes
+for (var i = 0; i < friends.length; i++) {
+  console.log(friends[i]);
+}
+
 // =============================================================
-
-// Basic route that sends the user first to the AJAX Page
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/app/public/home.html"));
-});
-
-app.get("/survey", function (req, res) {
-  res.sendFile(path.join(__dirname, "/app/public/survey.html"));
-});
-
-// Displays all friends
+// This displays all friends:
 app.get("/api/friends", function (req, res) {
   return res.json(friends);
 });
 
-// Displays a single friend, or returns false
+// This displays a single friend or returns false:
 // localhost:PORT/api/characters/yoda
 app.get("/api/friends/:friends", function (req, res) {
   var chosen = req.params.user;
@@ -64,14 +73,13 @@ app.get("/api/friends/:friends", function (req, res) {
   return res.json(false);
 });
 
-// Create New Friends - takes in JSON input
+// This creates new friends and receives JSON input:
 app.post("/api/friends", function (req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   var newFriend = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newFriend
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  // This uses a RegEx Pattern to remove spaces from newFriend
   newFriend.routeName = newFriend.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newFriend);
@@ -81,9 +89,5 @@ app.post("/api/friends", function (req, res) {
   res.json(newFriend);
 });
 
-// Starts the server to begin listening
-// =============================================================
-app.listen(PORT, function () {
-  console.log("App listening on PORT " + PORT);
-});
+
 
