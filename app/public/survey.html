@@ -14,7 +14,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
 </head>
 
 <body>
@@ -30,7 +29,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    <h2 id=best-match-name></h2>
+                    <img id=best-match-image>
 
                 </div>
                 <div class="modal-footer">
@@ -250,7 +250,6 @@
                                 name: $("#name").val().trim(),
                                 photo: $("#link").val().trim(),
                                 scores: [
-
                                     $("#name").val().trim(),
                                     $("#link").val().trim(),
                                     $("#q1").val().trim(),
@@ -266,6 +265,8 @@
                                 ]
                             }
                             $.post("/api/friends", newFriend).then(function (data) {
+                                $("#best-match-name").text(data.name);
+                                $("#best-match-image").attr("src", data.image);
                                 $("friend-modal").modal("toggle");
                             });
                         });

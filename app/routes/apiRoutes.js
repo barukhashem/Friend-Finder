@@ -13,7 +13,7 @@ module.exports = function (app) {
     var theMatch = {
       name: "",
       photo: "",
-      friendDifference: Infinity
+      friendDifference: 0
     };
 
     for (var i = 0; i < friends.length; i++) {
@@ -27,17 +27,16 @@ module.exports = function (app) {
         totalDifference += Math.abs(num2 - num1);
       }
 
+      
       if (totalDifference <= theMatch.friendDifference) {
-        theMatch.name = friends[i].name;
-        theMatch.photo = friends[i].photo;
-        theMatch.friendDifference = totalDifference;
+        alert("hi");
+        // console.log(friends[i].photo);
+        // theMatch.name = friends[i].name;
+        // theMatch.photo = friends[i].photo;
+        // theMatch.friendDifference = totalDifference;
 
       }
     };
-
-    var modaldiv = $("<div>");
-    modaldiv.text(theMatch.name);
-
 
     friends.push(newFriend);
 
