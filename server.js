@@ -37,14 +37,6 @@ var user2 = friends[1].scores;
 console.log(user1, user2);
 var totalDifference = 0;
 
-// for (var i = 0; i < user1.length; i++) {
-//   // console.log(user1[i], user2[i]);
-//   var num1 = user1[i];
-//   var num2 = user2[i];
-//   var singleDifference = Math.abs(num1 - num2);
-//   console.log(singleDifference);
-//   totalDifference = singleDifference + totalDifference;
-// }
 console.log(totalDifference);
 
 for (var i = 0; i < friends.length; i++) {
@@ -88,6 +80,3 @@ app.post("/api/friends", function (req, res) {
 
   res.json(newFriend);
 });
-
-
-

@@ -30,7 +30,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
+
 
                 </div>
                 <div class="modal-footer">
@@ -97,7 +97,7 @@
                                         </select>
                                     </div>
                             </div>
-                            <!-- <div class="row col-lg-12">
+                            <div class="row col-lg-12">
                                 <h4>Question 3</h3>
                                     <br>
                                     <br>
@@ -232,7 +232,7 @@
                                         <option>5 (Strongly Agree)</option>
                                     </select>
                                 </div>
-                            </div> -->
+                            </div>
                             <br>
                             <button type="button" class="btn btn-primary btn-block" id="submit" data-toggle="modal"
                                 data-target="#best-match">Submit</button>
@@ -244,7 +244,7 @@
                         $("#submit").on("click", function (event) {
                             event.preventDefault();
 
-                            //creating an object to hold the newly entered information
+                            //This creates an object to hold the newly entered information:
                             var newFriend =
                             {
                                 name: $("#name").val().trim(),
@@ -254,35 +254,21 @@
                                     $("#name").val().trim(),
                                     $("#link").val().trim(),
                                     $("#q1").val().trim(),
-                                    $("#q2").val().trim()
-                                    // $("#q3").val().trim(),
-                                    // $("#q4").val().trim(),
-                                    // $("#q5").val().trim(),
-                                    // $("#q6").val().trim(),
-                                    // $("#q7").val().trim(),
-                                    // $("#q8").val().trim(),
-                                    // $("#q9").val().trim(),
-                                    // $("#q10").val().trim(),
+                                    $("#q2").val().trim(),
+                                    $("#q3").val().trim(),
+                                    $("#q4").val().trim(),
+                                    $("#q5").val().trim(),
+                                    $("#q6").val().trim(),
+                                    $("#q7").val().trim(),
+                                    $("#q8").val().trim(),
+                                    $("#q9").val().trim(),
+                                    $("#q10").val().trim()
                                 ]
                             }
                             $.post("/api/friends", newFriend).then(function (data) {
                                 $("friend-modal").modal("toggle");
-
-                                // var bestMatch;
-                                // var currentBestMatch = 22;
-                                // var differenceArray = [];
                             });
                         });
-
-                        //This empty array holds the value from the survey questions:
-                        // var answerArray = [];
-
-                        //loop to push the answers from survey to the array (NEED TO UPDATE i< AS QUESTIONS ARE ADDED)
-                        // for (i = 1; i < 11; i++) {
-                        //     answerArray.push(parseInt($("#question" + i).val().substring(0, 1)));
-                        // }
-                        // });
-
                     </script>
                 </div>
                 <footer class="footer">

@@ -4,22 +4,12 @@
 
 // 2) A default, catch-all route that leads to home.html which displays the home page.
 
-// ===============================================================================
 // DEPENDENCIES
 // This requires the path package to get the correct file path for the html:
-// ===============================================================================
+
 var path = require("path");
 
-// ===============================================================================
-// ROUTING
-// ===============================================================================
-
 module.exports = function (app) {
-  // HTML GET Requests
-  // Below code handles when users "visit" a page.
-  // In each of the below cases the user is shown an HTML page of content
-  // ---------------------------------------------------------------------------
-
   // ROUTES
   // This route sends the user first to the AJAX page:
   app.get("/", function (req, res) {
