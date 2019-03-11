@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Friend Finder</h1>
@@ -63,56 +64,58 @@
                                 <input type="text" class="form-control" id="link">
                             </div>
                             <h3>Please select how strongly you agree or disagree with the following statements:</h3>
+                            <br>
+                            <br>
                             <div class="row col-lg-12">
-                                <h4>Question 1</h3>
-                                    <br>
-                                    <br>
-                                    <h4>You have an outgoing personality.</h4>
-                                    <br>
-                                    <br>
-                                    <div class="form-group col-xs-3">
-                                        <select class="form-control" id="q1">
-                                            <option>1 (Strongly Disagree)</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5 (Strongly Agree)</option>
-                                        </select>
-                                    </div>
+                                <h4>Question 1</h4>
+                                <br>
+                                <br>
+                                <h4>You have an outgoing personality.</h4>
+                                <br>
+                                <br>
+                                <div class="form-group col-xs-3">
+                                    <select class="form-control" id="q1">
+                                        <option>1 (Strongly Disagree)</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5 (Strongly Agree)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row col-lg-12">
-                                <h4>Question 2</h3>
-                                    <br>
-                                    <br>
-                                    <h4>You tend to keep your word.</h4>
-                                    <br>
-                                    <br>
-                                    <div class="form-group col-xs-3">
-                                        <select class="form-control" id="q2">
-                                            <option>1 (Strongly Disagree)</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5 (Strongly Agree)</option>
-                                        </select>
-                                    </div>
+                                <h4>Question 2</h4>
+                                <br>
+                                <br>
+                                <h4>You tend to keep your word.</h4>
+                                <br>
+                                <br>
+                                <div class="form-group col-xs-3">
+                                    <select class="form-control" id="q2">
+                                        <option>1 (Strongly Disagree)</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5 (Strongly Agree)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row col-lg-12">
-                                <h4>Question 3</h3>
-                                    <br>
-                                    <br>
-                                    <h4>You like children.</h4>
-                                    <br>
-                                    <br>
-                                    <div class="form-group col-xs-3">
-                                        <select class="form-control" id="q3">
-                                            <option>1 (Strongly Disagree)</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5 (Strongly Agree)</option>
-                                        </select>
-                                    </div>
+                                <h4>Question 3</h4>
+                                <br>
+                                <br>
+                                <h4>You like children.</h4>
+                                <br>
+                                <br>
+                                <div class="form-group col-xs-3">
+                                    <select class="form-control" id="q3">
+                                        <option>1 (Strongly Disagree)</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5 (Strongly Agree)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row col-lg-12">
                                 <h4>Question 4</h4>
@@ -250,8 +253,8 @@
                                 name: $("#name").val().trim(),
                                 photo: $("#link").val().trim(),
                                 scores: [
-                                    $("#name").val().trim(),
-                                    $("#link").val().trim(),
+                                    // $("#name").val().trim(),
+                                    // $("#link").val().trim(),
                                     $("#q1").val().trim(),
                                     $("#q2").val().trim(),
                                     $("#q3").val().trim(),
@@ -265,6 +268,7 @@
                                 ]
                             }
                             $.post("/api/friends", newFriend).then(function (data) {
+                                console.log(data);
                                 $("#best-match-name").text(data.name);
                                 $("#best-match-image").attr("src", data.image);
                                 $("friend-modal").modal("toggle");
