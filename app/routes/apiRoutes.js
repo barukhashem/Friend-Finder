@@ -5,7 +5,7 @@ module.exports = function (app) {
         res.json(friends);
     });
 
-    app.post("api/friends", function (req, res) {
+    app.post("/api/friends", function (req, res) {
 
         var bestMatch = {
             name: "",

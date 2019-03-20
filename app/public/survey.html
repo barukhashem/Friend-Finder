@@ -29,8 +29,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2 id=best-match-name></h2>
-                    <img id=best-match-image>
+                    <h2 id="best-match-name"></h2>
+                    <img id="best-match-image">
 
                 </div>
                 <div class="modal-footer">
@@ -270,7 +270,7 @@
                             $.post("/api/friends", newFriend).then(function (data) {
                                 console.log(data);
                                 $("#best-match-name").text(data.name);
-                                $("#best-match-image").attr("src", data.image);
+                                $("#best-match-image").attr("src", data.photo);
                                 $("friend-modal").modal("toggle");
                             });
                         });
